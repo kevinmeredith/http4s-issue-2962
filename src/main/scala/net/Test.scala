@@ -11,6 +11,7 @@ import scala.concurrent.ExecutionContext
 
 object Test {
 
+  // Note - I copied this code from https://github.com/http4s/http4s/issues/2962#issue-518017553
   def main(args: Array[String]): Unit = {
     val int                       = new AtomicInteger(0)
     implicit val CS               = IO.contextShift(ExecutionContext.global)
