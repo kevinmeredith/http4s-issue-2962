@@ -29,7 +29,7 @@ object Test {
         .covary[IO]
         .parJoin(100)
         .take(1000)
-        .observe(x => x.flatMap(y => Stream.eval(IO(println(">>> " + int.incrementAndGet + " " + y)))))
+        .flatMap(y => Stream.eval(IO(println(">>> " + int.incrementAndGet + " " + y))))
         .compile
         .drain
       s <- c.status(Request[IO](uri = uri"""http://httpbin.org/status/500""")).attempt
