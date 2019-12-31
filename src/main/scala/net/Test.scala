@@ -27,7 +27,8 @@ object Test {
       status = c.status(Request[IO](uri = uri"""http://httpbin.org/status/500""")).attempt
       _ <- Stream(Stream.eval(status)).repeat
         .covary[IO]
-        .parJoin(200)
+        // .parJoin(200)  
+        .parJoin(Runtime.getRuntime().availableProcessors())
         .take(1000)
         .flatMap(y => Stream.eval(IO(println(">>> " + int.incrementAndGet + " " + y))))
         .compile
